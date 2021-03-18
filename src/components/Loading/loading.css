@@ -1,0 +1,31 @@
+.loading__wrapper {
+  position: absolute;
+
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Animation declared in index.css */
+  animation: 1s linear 0s fade-in;
+}
+
+.loading__text {
+  position: relative;
+}
+
+.loading__text::after {
+  position: absolute;
+
+  overflow: hidden;
+  display: inline-block;
+  content: "\2026";
+  width: 0px;
+  animation: ellipsis linear 900ms infinite;
+}
+
+@keyframes ellipsis {
+  to {
+    width: 1em;
+  }
+}
