@@ -6,7 +6,7 @@ export default function useFetchWorkload(numSamples) {
   useEffect(() => {
     async function fetchLoad() {
       try {
-        let response = await fetch("/api/cpuLoad");
+        let response = await fetch("/.netlify/functions/workload");
         // let textValue = await response.text();
         let load = await response.json();
 

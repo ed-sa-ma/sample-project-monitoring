@@ -21,3 +21,9 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Netlify local dev config
+netlify_tokens.md
+
+# Local VSCode REST client
+/requests
