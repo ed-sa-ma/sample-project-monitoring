@@ -1,0 +1,29 @@
+.landingPage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.landingPage h1 {
+  margin-bottom: 1.5em;
+}
+
+/* .landingPage > * + * {
+  margin-top: 1.5em;
+} */
+
+.landingPage__button {
+  background-color: var(--indigo);
+  color: var(--white);
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+}
+
+.landingPage__dataWrapper {
+  max-height: 0;
+  overflow: hidden;
+}
+
+.landingPage__dataPlaceholder {
+  opacity: 0;
+}

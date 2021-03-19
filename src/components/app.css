@@ -1,5 +1,7 @@
-.App {
-  padding: 1rem;
+.app {
   min-height: 100vh;
-  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
 }

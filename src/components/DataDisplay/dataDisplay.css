@@ -1,30 +1,11 @@
 .dataDisplay {
-  --headline-top: 15%;
-  /* Height of headline when in a single line. Note that in small screens text wraps in various
-  lines and this height grows. So data display and headline will apear less spaced. */
-  --headline-height: 40px;
-  width: 90%;
-  max-width: 600px;
-
-  position: absolute;
-  /* We place the data right below the headline with a margin of 1.5rem; */
-  top: calc(var(--headline-top) + var(--headline-height) + 1.5rem);
-  left: 50%;
-  transform: translateX(-50%);
-
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* Animation declared in index.css */
-  animation: 2s linear 0s fade-in;
+  max-width: 600px;
 }
 
-.dataDisplay > * + * {
+/* chart.js adds a first child in dataDisplay so we remove the margin-top for the second child. */
+.dataDisplay > * + *:not(:nth-child(2)) {
   margin-top: 1.5rem;
-}
-
-@media (min-width: 900px) {
-  .dataDisplay {
-    width: 60%;
-  }
 }

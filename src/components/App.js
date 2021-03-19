@@ -1,31 +1,13 @@
-import React, { lazy, Suspense, useState } from "react";
+import React from "react";
 
-import WelcomePage from "./WelcomePage/WelcomePage";
-// import DataDisplay from "./components/DataDisplay/DataDisplay";
+import LandingPage from "./LandingPage/LandingPage";
 
 import "./app.css";
-import Loading from "./Loading/Loading";
 
-const DataDisplay = lazy(() => import("./DataDisplay/DataDisplay"));
-
-function App() {
-  const [collapsedWelcome, setCollapsedWelcome] = useState(false);
-
+export default function App() {
   return (
-    <div className="App">
-      <WelcomePage
-        fullPage={!collapsedWelcome}
-        onClickEnterButton={() => {
-          setCollapsedWelcome(true);
-        }}
-      />
-      {collapsedWelcome && (
-        <Suspense fallback={<Loading />}>
-          <DataDisplay />
-        </Suspense>
-      )}
+    <div className="app">
+      <LandingPage />
     </div>
   );
 }
-
-export default App;

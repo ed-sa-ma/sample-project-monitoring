@@ -4,7 +4,7 @@ import LineChart from "./LineGraph/LineGraph";
 import InfoMessages from "./InfoMessages/InfoMessages";
 import RangeControl from "./RangeControl/RangeControl";
 import { generateLabels } from "./helpers";
-import useFetchWorkload from "./hooks/useFetchWorkload";
+import useFetchWorkload from "./useFetchWorkload";
 
 import "./dataDisplay.css";
 

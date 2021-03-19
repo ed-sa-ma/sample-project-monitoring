@@ -1,0 +1,13 @@
+.change {
+  animation: 2s linear 0s fade-in;
+}
+
+@keyframes grow-in {
+  0% {
+    max-height: 0;
+  }
+
+  100% {
+    max-height: 200px;
+  }
+}
