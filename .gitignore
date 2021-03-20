@@ -24,6 +24,7 @@ yarn-error.log*
 
 # Netlify local dev config
 netlify_tokens.md
+netlify.toml
 
 # Local VSCode REST client
 /requests
