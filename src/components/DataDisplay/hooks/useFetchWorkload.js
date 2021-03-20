@@ -16,7 +16,7 @@ export default function useFetchWorkload(numSamples) {
   useEffect(() => {
     async function fetchLoad() {
       try {
-        let response = await fetch("/.netlify/functions/workload");
+        let response = await fetch("/api/workload");
         let load = await response.json();
 
         // Keep a maximum of numSamples items.

@@ -16,7 +16,6 @@ export default function useResizeMonitor(selectorOrRef, cb) {
         cb(element.getBoundingClientRect());
       });
 
-      console.log("Attaching resize");
       let elementRef =
         typeof selectorOrRef === "string" ? document.querySelector(selectorOrRef) : selectorOrRef;
 
