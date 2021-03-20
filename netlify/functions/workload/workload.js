@@ -8,7 +8,7 @@ exports.handler = async function workload(event) {
   }
 
   try {
-    let load1min = os.loadavg()[0];
+    let load1min = os.loadavg()[0].toFixed(4);
 
     let time = new Date();
 

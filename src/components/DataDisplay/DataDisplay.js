@@ -43,14 +43,14 @@ export default function DataDisplay() {
   return (
     <div className="dataDisplay">
       <p>
-        {`Find below the evolution of the average workload of your Central Procressing Unit. Heavy workload state will be activated when the value overpasses
+        {`Find below the evolution of the average workload of the instance running our lambda function. Heavy workload state will be activated when the value overpasses
         ${threshold}
-        for > ${THRESHOLD_DURATION}min.`}
+        for > ${THRESHOLD_DURATION}min. Threshold value can be chaged to be able to enter this state.`}
       </p>
       <RangeControl
         label={"Threshold: "}
-        max={2}
-        min={0.1}
+        max={4}
+        min={0}
         step={0.1}
         onChange={handleThresholdChange}
         value={threshold}
