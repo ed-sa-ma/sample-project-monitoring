@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from "react";
 
-import { debounce } from "../helpers";
+import { debounce } from "../../../helpers";
 
 import "./RangeControl.css";
 

@@ -11,12 +11,12 @@ function openDataAnimation({ height, timelineConf }) {
     transform: "scale(0)",
     ease: "back.in()"
   })
-    .to(".landingPage__dataWrapper", {
+    .to(".landingPage__displayWrapper", {
       maxHeight: height,
       ease: "expo.inOut()",
       duration: 1.5
     })
-    .to(".landingPage__dataWrapper", {
+    .to(".landingPage__displayWrapper", {
       opacity: 1
     });
 }

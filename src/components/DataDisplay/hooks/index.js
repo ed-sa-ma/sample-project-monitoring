@@ -10,7 +10,7 @@ import { useEffect, useState } from "react";
  * @param {number} numSamples
  * @returns {Workload[]} dataArray
  */
-export default function useFetchWorkload(numSamples) {
+function useFetchWorkload(numSamples) {
   const [dataArray, setDataArray] = useState([]);
 
   useEffect(() => {
@@ -46,3 +46,5 @@ export default function useFetchWorkload(numSamples) {
 
   return dataArray;
 }
+
+export { useFetchWorkload };

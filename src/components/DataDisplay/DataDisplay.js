@@ -3,8 +3,8 @@ import React, { useCallback, useMemo, useState } from "react";
 import LineChart from "./LineGraph/LineGraph";
 import InfoMessages from "./InfoMessages/InfoMessages";
 import RangeControl from "./RangeControl/RangeControl";
-import { generateLabels } from "./helpers";
-import useFetchWorkload from "./hooks/useFetchWorkload";
+import { useFetchWorkload } from "./hooks";
+import { generateLabels } from "../../helpers";
 
 import "./dataDisplay.css";
 

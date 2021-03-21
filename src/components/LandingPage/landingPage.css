@@ -54,7 +54,7 @@
   opacity: 1;
 }
 
-.landingPage__dataWrapper {
+.landingPage__displayWrapper {
   opacity: 0;
   max-height: 0;
 }

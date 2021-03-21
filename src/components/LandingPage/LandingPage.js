@@ -1,22 +1,17 @@
 import React, { Suspense, useCallback, useEffect, useState } from "react";
 
 import { openDataAnimation } from "./animation";
-import useResizeMonitor from "./hooks/useResizeMonitor";
+import { useResizeObserver } from "./hooks";
+import { lazyWithPreload } from "../../helpers";
 
 import "./landingPage.css";
-
-function lazyWithPreload(factory) {
-  const Component = React.lazy(factory);
-  Component.preload = factory;
-  return Component;
-}
 
 const DataDisplay = lazyWithPreload(() => import("../DataDisplay/DataDisplay"));
 
 export default function LandingPage() {
   const [open, setOpen] = useState(false);
   const [dataDisplayRef, setDataDisplayRef] = useState(null);
-  const [dataWrapperRef, setDataWrapperRef] = useState(null);
+  const [displayWrapperRef, setDisplayWrapperRef] = useState(null);
   const [loading, setLoading] = useState(false);
 
   const loadDataDisplay = useCallback(() => {
@@ -30,36 +25,41 @@ export default function LandingPage() {
 
   const handleResizeElement = useCallback(
     (clientRect) => {
-      if (dataWrapperRef) {
-        dataWrapperRef.style["max-height"] = `${clientRect.height}px`;
-        dataWrapperRef.style.transition = "max-height ease-in-out 0.3s";
+      if (displayWrapperRef) {
+        displayWrapperRef.style["max-height"] = `${clientRect.height}px`;
+        // Setting transition now so it doesn't mess with the initial animation that already happened.
+        displayWrapperRef.style.transition = "max-height ease-in-out 0.3s";
       }
     },
-    [dataWrapperRef]
+    [displayWrapperRef]
   );
 
-  const connectResizeMonitor = useResizeMonitor(dataDisplayRef, handleResizeElement);
+  const connectResizeObserver = useResizeObserver(dataDisplayRef, handleResizeElement);
 
   useEffect(() => {
+    // Trigger animation when DataDisplay appears in the page.
+
     if (dataDisplayRef) {
       let dataDisplayHeight = dataDisplayRef.getBoundingClientRect().height;
       openDataAnimation({
         height: dataDisplayHeight,
-        timelineConf: { onComplete: connectResizeMonitor }
+        timelineConf: { onComplete: connectResizeObserver }
       });
     }
-  }, [connectResizeMonitor, dataDisplayRef]);
+  }, [connectResizeObserver, dataDisplayRef]);
 
   return (
     <div className="landingPage">
       <h1>CPU Monitoring App</h1>
       <div
-        className="landingPage__dataWrapper"
+        className="landingPage__displayWrapper"
         ref={(ref) => {
-          setDataWrapperRef(ref);
+          setDisplayWrapperRef(ref);
         }}
       >
         {open && (
+          // Using Suspense's fallback messes with animations so we do our own
+          // loading state in the button.
           <Suspense fallback={null}>
             <DataDisplay
               ref={(ref) => {

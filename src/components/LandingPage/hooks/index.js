@@ -3,9 +3,9 @@ import { useCallback, useEffect, useState } from "react";
 /**
  * @param {string|HTMLElement} selectorOrRef
  * @param {@function} cb
- * @returns @function connectResizeMonitor
+ * @returns @function connectResizeObserver
  */
-export default function useResizeMonitor(selectorOrRef, cb) {
+function useResizeObserver(selectorOrRef, cb) {
   const [enabled, setEnabled] = useState(false);
 
   useEffect(() => {
@@ -27,9 +27,11 @@ export default function useResizeMonitor(selectorOrRef, cb) {
     }
   }, [cb, enabled, selectorOrRef]);
 
-  const connectResizeMonitor = useCallback(() => {
+  const connectResizeObserver = useCallback(() => {
     setEnabled(true);
   }, []);
 
-  return connectResizeMonitor;
+  return connectResizeObserver;
 }
+
+export { useResizeObserver };
