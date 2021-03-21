@@ -1,16 +1,32 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { Suspense, useCallback, useEffect, useState } from "react";
 
-import DataDisplay from "../DataDisplay/DataDisplay";
-import openDataAnimation from "./animation/openData";
+import { openDataAnimation } from "./animation";
 import useResizeMonitor from "./hooks/useResizeMonitor";
 
 import "./landingPage.css";
+
+function lazyWithPreload(factory) {
+  const Component = React.lazy(factory);
+  Component.preload = factory;
+  return Component;
+}
+
+const DataDisplay = lazyWithPreload(() => import("../DataDisplay/DataDisplay"));
 
 export default function LandingPage() {
   const [open, setOpen] = useState(false);
   const [dataDisplayRef, setDataDisplayRef] = useState(null);
   const [dataWrapperRef, setDataWrapperRef] = useState(null);
-  const dataRef = useRef(null);
+  const [loading, setLoading] = useState(false);
+
+  const loadDataDisplay = useCallback(() => {
+    setLoading(true);
+
+    DataDisplay.preload().then(() => {
+      setOpen(true);
+      setLoading(false);
+    });
+  }, []);
 
   const handleResizeElement = useCallback(
     (clientRect) => {
@@ -34,10 +50,6 @@ export default function LandingPage() {
     }
   }, [connectResizeMonitor, dataDisplayRef]);
 
-  function openData() {
-    setOpen((o) => !o);
-  }
-
   return (
     <div className="landingPage">
       <h1>CPU Monitoring App</h1>
@@ -48,19 +60,21 @@ export default function LandingPage() {
         }}
       >
         {open && (
-          <div
-            className="landingPage__dataPlaceholder"
-            ref={(ref) => {
-              setDataDisplayRef(ref);
-            }}
-          >
-            <div ref={dataRef}>
-              <DataDisplay />
-            </div>
-          </div>
+          <Suspense fallback={null}>
+            <DataDisplay
+              ref={(ref) => {
+                setDataDisplayRef(ref);
+              }}
+            />
+          </Suspense>
         )}
       </div>
-      <button className="landingPage__button" onClick={openData}>
+      <button
+        className={`landingPage__button ${loading ? "loading" : ""}`.trim()}
+        onClick={loadDataDisplay}
+        disabled={loading}
+      >
+        <div className="translucent" />
         ENTER
       </button>
     </div>

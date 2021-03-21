@@ -8,22 +8,59 @@
   margin-bottom: 1.5em;
 }
 
-/* .landingPage > * + * {
-  margin-top: 1.5em;
-} */
-
 .landingPage__button {
+  --border-radius: 5px;
+  position: relative;
+
   background-color: var(--indigo);
   color: var(--white);
   padding: 0.5rem 1rem;
-  border-radius: 5px;
+  border-radius: var(--border-radius);
+}
+
+.landingPage__button .translucent {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  display: none;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: var(--border-radius);
+}
+
+.landingPage__button.loading .translucent {
+  display: initial;
+}
+
+.landingPage__button::after {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  opacity: 0;
+  content: "";
+  background-image: url("/workload-assets/loader.png");
+  background-size: 30%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  animation: spin 1.5s linear infinite;
+}
+
+.landingPage__button.loading::after {
+  opacity: 1;
 }
 
 .landingPage__dataWrapper {
+  opacity: 0;
   max-height: 0;
-  overflow: hidden;
 }
 
-.landingPage__dataPlaceholder {
-  opacity: 0;
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
